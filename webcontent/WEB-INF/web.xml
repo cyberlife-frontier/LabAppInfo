@@ -9,4 +9,14 @@
     <welcome-file>default.jsp</welcome-file>
     <welcome-file>default.htm</welcome-file>
   </welcome-file-list>
+  <servlet>
+    <description></description>
+    <display-name>AppBasicInfoServlet</display-name>
+    <servlet-name>AppBasicInfoServlet</servlet-name>
+    <servlet-class>com.controller.AppBasicInfoServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AppBasicInfoServlet</servlet-name>
+    <url-pattern>/AppBasicInfoServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
