@@ -7,25 +7,23 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.List;
-import java.util.stream.Collectors;
 
-import com.entity.ApplianceInfo;
-import com.service.AppBasicInfoService;
-import com.service.impl.AppBasicInfoServiceImpl;
+import com.dto.LabAppStat;
+import com.service.InfoStatService;
+import com.service.impl.InfoStatServiceImpl;
 
-@WebServlet("/AppBasicInfo")
+@WebServlet("/InfoStatistics")
 /**
- * Servlet implementation class AppBasicInfoServlet
+ * Servlet implementation class InfoStatServlet
  */
-public class AppBasicInfoServlet extends HttpServlet {
+public class InfoStatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-    private AppBasicInfoService AppBasicInfoService = new AppBasicInfoServiceImpl();
-    private List<String> AppNum = null;
-    
+    private InfoStatService InfoStatService = new InfoStatServiceImpl();
+    List<String> InfoStat =null;
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AppBasicInfoServlet() {
+    public InfoStatServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -45,29 +43,22 @@ public class AppBasicInfoServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("UTF-8");
-		List<ApplianceInfo> ApplianceInfo = null;
+		
 		String method = request.getParameter("method");
 		switch(method) {
-		case "AllInfo":
-			ApplianceInfo = this.AppBasicInfoService.ApplianceInfo();
-			AppNum = ApplianceInfo.stream().map(com.entity.ApplianceInfo::getApp_num).collect(Collectors.toList());
-			request.setAttribute("ApplianceInfo", ApplianceInfo);
-			request.setAttribute("AppNum", AppNum);
-			request.getRequestDispatcher("BasicInfo.jsp").forward(request, response);
-			break;
-		case "queryinfo":
-			String key = request.getParameter("key");
+		case "labAppStat":
+			InfoStat = this.InfoStatService.InfoStat();
 			String value = request.getParameter("value");
-			ApplianceInfo = this.AppBasicInfoService.InfoQuery(key, value);
-			request.setAttribute("ApplianceInfo", ApplianceInfo);
-			request.setAttribute("AppNum", AppNum);
-			request.getRequestDispatcher("BasicInfo.jsp").forward(request, response);
+			if( value == null ) value = "031005";
+			List<LabAppStat> LabAppStat = this.InfoStatService.LabAppStat(value);
+			request.setAttribute("InfoStat", InfoStat);
+			request.setAttribute("LabAppStat", LabAppStat);
+			request.setAttribute("LabNum", value);
+			request.getRequestDispatcher("AppInfoStat").forward(request, response);
 			break;
-		
+			
 		
 		}
-		
-		
 		
 	}
 

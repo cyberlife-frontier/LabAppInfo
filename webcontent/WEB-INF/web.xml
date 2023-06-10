@@ -19,4 +19,23 @@
     <servlet-name>AppBasicInfoServlet</servlet-name>
     <url-pattern>/AppBasicInfoServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>InfoStatServlet</display-name>
+    <servlet-name>InfoStatServlet</servlet-name>
+    <servlet-class>com.controller.InfoStatServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>InfoStatServlet</servlet-name>
+    <url-pattern>/InfoStatServlet</url-pattern>
+  </servlet-mapping>
+  <servlet>
+  	<servlet-name>InfoStatJsp</servlet-name>
+  	<jsp-file>/InfoStat.jsp</jsp-file>
+  </servlet>
+  <servlet-mapping>
+  	<servlet-name>InfoStatJsp</servlet-name>
+  	<url-pattern>/AppInfoStat</url-pattern>
+  </servlet-mapping>
+  
 </web-app>

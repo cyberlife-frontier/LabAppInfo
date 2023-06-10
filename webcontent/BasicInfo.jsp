@@ -24,7 +24,7 @@
   </div>
   <div class="panel-body" >
   <!--search students info  -->
-    <form  role="form" class="form-inline" action="" method="post" >
+    <form  role="form" class="form-inline" action="AppBasicInfo?method=queryinfo" method="post" >
       <div class="form-group">
         <label style="color:white;">条件：
           <select name="key" class="form-control" id="key-change"  onchange="csschange()">
@@ -40,8 +40,8 @@
           <input id="name-key" type="text" class="form-control" name="value" placeholder="关键字" maxlength="40" >
           <input type="text" class="form-control" id="num-key" list="datanum" placeholder="关键字" style="display:none;">
           <datalist id="datanum" class="form-control" style="display:none;">
-          	<c:forEach items="${ApplianceInfo }" var="abi">
-            <option value="${abi.app_num }">${abi.app_num }</option>
+          	<c:forEach items="${AppNum }" var="an">
+            <option value="${an }"></option>
             </c:forEach>
           </datalist>
           
@@ -56,7 +56,7 @@
         </button>
         <!--search students info  -->
       </div>
-      <!-- add button-->
+       <!-- add button-->
       <div class="form-group " style="margin-left: 40px">
         <button title="addStu" type="button" class="btn btn-default" data-toggle="modal" data-target="#addUserModal">
 										<span style="margin-right: 5px" class="" aria-hidden="true">
@@ -65,7 +65,14 @@
         </button>
        
       </div> <!-- add button -->
+      <div class="form-group " style="margin-left: 40px">
+      <a href="InfoStatistics?method=labAppStat">
+      <button type="button" class="button-default">统计</button>
+      </a>
+      </div>
+      
     </form>
+
   </div>
 </div>
 <!-- panel-custom -->
