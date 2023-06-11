@@ -10,6 +10,7 @@ import java.util.List;
 import com.dto.LabAppStat;
 import com.util.JDBCUtil;
 import com.dao.InfoStatDao;
+import com.dto.YearAppStat;
 
 public class InfoStatDaoImpl implements InfoStatDao{
 
@@ -63,6 +64,34 @@ public class InfoStatDaoImpl implements InfoStatDao{
 		}
 
 		return InfoStat;
+	}
+
+	@Override
+	public List<YearAppStat> YearAppStat() {
+		// TODO 自动生成的方法存根
+		Connection connection = JDBCUtil.getDBconnection();
+		String sql = "select substring(date_purchase,1,4) as years,"
+				+ "count(substring(date_purchase,1,4)) as counts "
+				+ "from lab_app_info.appliance_info group by years order by years";
+		PreparedStatement statement = null;
+		ResultSet resultset = null;
+		List<YearAppStat> YearAppStat = new ArrayList<>();
+		try {
+			statement = connection.prepareStatement(sql);
+			resultset = statement.executeQuery();
+			while(resultset.next()) {
+				String years = resultset.getString(1);
+				Integer counts = resultset.getInt(2);
+				YearAppStat.add(new YearAppStat(years,counts));
+			}
+
+		}catch(SQLException throwables) {
+			
+		}finally {
+			JDBCUtil.closeDB(connection,statement,resultset);
+		}
+
+		return YearAppStat;
 	}
 
 }

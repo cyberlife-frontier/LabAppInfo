@@ -11,6 +11,7 @@ import java.util.List;
 import com.dto.LabAppStat;
 import com.service.InfoStatService;
 import com.service.impl.InfoStatServiceImpl;
+import com.dto.YearAppStat;
 
 @WebServlet("/InfoStatistics")
 /**
@@ -19,7 +20,8 @@ import com.service.impl.InfoStatServiceImpl;
 public class InfoStatServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
     private InfoStatService InfoStatService = new InfoStatServiceImpl();
-    List<String> InfoStat =null;
+    
+    List<YearAppStat> YearAppStat = null;
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,16 +49,22 @@ public class InfoStatServlet extends HttpServlet {
 		String method = request.getParameter("method");
 		switch(method) {
 		case "labAppStat":
-			InfoStat = this.InfoStatService.InfoStat();
+			List<String> InfoStat = this.InfoStatService.InfoStat();
 			String value = request.getParameter("value");
 			if( value == null ) value = "031005";
 			List<LabAppStat> LabAppStat = this.InfoStatService.LabAppStat(value);
 			request.setAttribute("InfoStat", InfoStat);
 			request.setAttribute("LabAppStat", LabAppStat);
+			request.setAttribute("YearAppStat", YearAppStat);
 			request.setAttribute("LabNum", value);
 			request.getRequestDispatcher("AppInfoStat").forward(request, response);
 			break;
+		case "yearAppStat":
+			YearAppStat = this.InfoStatService.YearAppStat();
 			
+			request.getRequestDispatcher("InfoStatistics?method=labAppStat").forward(request, response);
+			
+			break;
 		
 		}
 		

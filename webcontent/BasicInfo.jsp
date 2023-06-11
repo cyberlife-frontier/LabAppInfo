@@ -66,7 +66,7 @@
        
       </div> <!-- add button -->
       <div class="form-group " style="margin-left: 40px">
-      <a href="InfoStatistics?method=labAppStat">
+      <a href="InfoStatistics?method=yearAppStat">
       <button type="button" class="button-default">统计</button>
       </a>
       </div>

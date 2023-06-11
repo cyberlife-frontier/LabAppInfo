@@ -10,6 +10,8 @@
 	<title>信息统计</title>
 	<link rel="stylesheet" href="css/style.css">
 	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 	<script type="text/javascript" 
 	src="https://fastly.jsdelivr.net/npm/echarts@5.4.2/dist/echarts.min.js">
 	</script>
@@ -23,7 +25,7 @@
   </div>
   <div class="panel-body" >
   <!--search students info  -->
-    <form  role="form" class="form-inline" action="" method="post" >
+    <form  role="form" class="form-inline" action="InfoStatistics?method=labAppStat" method="post" >
       <div class="form-group">
        <label style="color:white;">条件：
           <span class="form-control">
@@ -51,12 +53,90 @@
         </button>
         <!--search students info  -->
       </div>
+      
+      <div class="form-group">
+        <button type="button" class="button-default" onclick="showDia()"
+        >年份采购统计
+        </button>
+        <!--years app stat info  -->
+      </div>
+      
     </form>
   </div>
 </div>
 <!-- panel-custom -->
 
 
+<!--不同年份购置仪器数量变化  -->
+
+<dialog id ="DialogInfo"  style="height: 70%;width:70%;top:10%;left:20%;">
+	
+    <div id="yearStat" style="height: 100%"></div>
+	<button onclick="closeDia()" class="btn btn-danger">关闭</button>
+</dialog>
+<script type="text/javascript">
+var DialogInfo = document.getElementById("DialogInfo");
+function showDia(){
+	
+     DialogInfo.showModal();
+     showStat();
+}
+	
+function closeDia(){
+
+    DialogInfo.close();
+
+}
+</script>
+<script type="text/javascript">
+function showStat(){
+    var dom = document.getElementById('yearStat');
+    var myChart = echarts.init(dom, null, {
+      renderer: 'canvas',
+      useDirtyRect: false
+    });
+    var app = {};
+    
+    var option;
+
+    option = {
+  xAxis: {
+    type: 'category',
+    data: [
+    	<c:forEach items="${YearAppStat }" var="yas"> 
+    	  "${yas.years }",
+  		</c:forEach>
+    	
+    	]
+  },
+  yAxis: {
+    type: 'value'
+  },
+  series: [
+    {
+      data: [
+    	  <c:forEach items="${YearAppStat }" var="yas"> 
+    	  		"${yas.counts }",
+  			</c:forEach>
+    	  
+    	  ],
+      type: 'line'
+    }
+  ]
+};
+
+    if (option && typeof option === 'object') {
+      myChart.setOption(option);
+    }
+
+    window.addEventListener('resize', myChart.resize);
+  
+}
+</script>
+<!--不同年份购置仪器数量变化  -->
+
+
+<!--各实验室仪器数量占比  -->
 <div id="container" style="height: 100%"></div>
 
 <script type="text/javascript">
@@ -124,6 +204,8 @@
 
     window.addEventListener('resize', myChart.resize);
   </script>
+<!--各实验室仪器数量占比  -->
+
 
 </body>
 </html>

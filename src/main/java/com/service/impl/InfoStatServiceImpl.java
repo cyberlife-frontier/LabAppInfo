@@ -6,7 +6,7 @@ import com.service.InfoStatService;
 import com.dto.LabAppStat;
 import com.dao.InfoStatDao;
 import com.dao.impl.InfoStatDaoImpl;
-
+import com.dto.YearAppStat;
 
 public class InfoStatServiceImpl implements InfoStatService{
 	private InfoStatDao InfoStatDao = new InfoStatDaoImpl();
@@ -22,6 +22,12 @@ public class InfoStatServiceImpl implements InfoStatService{
 	public List<String> InfoStat() {
 		// TODO 自动生成的方法存根
 		return this.InfoStatDao.InfoStat();
+	}
+
+	@Override
+	public List<YearAppStat> YearAppStat() {
+		// TODO 自动生成的方法存根
+		return this.InfoStatDao.YearAppStat();
 	}
 
 }
