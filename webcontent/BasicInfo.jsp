@@ -17,6 +17,14 @@
 
 <body>
 
+<div class="video-wrap">
+    <video class="video-wrap__video" poster="images/img-bg@2x.png" 
+    src="videos/bg-video.mp4"  tabindex="-1"    
+    autoplay muted  loop>
+    </video>
+</div>
+
+
 <!-- panel-custom -->
 <div class="panel-custom">
   <div class="panel-heading">
@@ -271,8 +279,8 @@
 
 <!--the sequence of imported scripts cannot be changed -->
 <script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdn.bootcss.com/moment.js/2.22.1/moment-with-locales.min.js"></script>
-<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script>
+<!-- <script src="https://cdn.bootcss.com/moment.js/2.22.1/moment-with-locales.min.js"></script>
+<script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
 <script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="js/bijs.js" ></script>
 

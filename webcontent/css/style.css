@@ -49,12 +49,12 @@ body {
     pointer-events: none;
     width: 0;
     display: none;
-    -webkit-appearance: none
+    /* -webkit-appearance: none */
 }
 
 .video-wrap__video::-webkit-media-controls-current-time-display,.video-wrap__video::-webkit-media-controls-enclosure,.video-wrap__video::-webkit-media-controls-fullscreen-button,.video-wrap__video::-webkit-media-controls-mute-button,.video-wrap__video::-webkit-media-controls-time-remaining-display,.video-wrap__video::-webkit-media-controls-timeline,.video-wrap__video::-webkit-media-controls-toggle-closed-captions-button,.video-wrap__video::-webkit-media-controls-volume-slider {
     display: none;
-    -webkit-appearance: none
+    /* -webkit-appearance: none */
 }
 
 

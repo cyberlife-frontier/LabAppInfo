@@ -5,10 +5,20 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.Part;
+
 import java.io.IOException;
 import java.util.List;
 import java.util.stream.Collectors;
-
+import java.io.File;
+import java.util.Collection;
+import java.util.Iterator;
+import org.apache.commons.fileupload.FileItem;
+import org.apache.commons.fileupload.FileItemFactory;
+import org.apache.commons.fileupload.FileUploadException;
+import org.apache.commons.fileupload.disk.DiskFileItemFactory;
+import org.apache.commons.fileupload.servlet.ServletFileUpload;
+import org.apache.commons.fileupload.servlet.ServletRequestContext;
 
 import com.entity.ApplianceInfo;
 import com.service.AppBasicInfoService;
@@ -27,6 +37,7 @@ public class AppBasicInfoServlet extends HttpServlet {
     private List<String> AppNum = null;
     private List<String> InfoStat = null;//LabNum
     private List<String> PersonnelAdmin = null;
+    private String uploadPath = "D:\\Users\\Nash\\Documents\\eclipse-workspace\\LabAppInfo\\webcontent\\Assets\\images";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -81,9 +92,32 @@ public class AppBasicInfoServlet extends HttpServlet {
 			String date_purchase = request.getParameter("date_purchase");
 			String str[] = request.getParameterValues("app_admin");
 			this.AppBasicInfoService.addInfo(app_num, app_name, lab_num, date_purchase, str);
-			
+			 
+			/*
+			try {
+				// Create a factory for disk-based file items
+				DiskFileItemFactory factory = new DiskFileItemFactory();
+				// Set factory constraints
+				factory.setSizeThreshold(4096); // 设置缓冲区大小，这里是4kb
+				factory.setRepository(new File(this.getServletContext().getRealPath("/WEB-INF/temp")));// 设置缓冲区目录
+				// Create a new file upload handler
+				ServletFileUpload upload = new ServletFileUpload(factory);
+				// Set overall request size constraint
+				upload.setSizeMax(4194304); // 设置最大文件尺寸，这里是4MB
+				
+				 final Collection<Part> parts = request.getParts();
+				 for (final Part part : parts) {
+				       part.write(uploadPath+part.getSubmittedFileName());
+				    }
+				 //response.getWriter().print("The file has been uploaded successfully.");
+			}catch(Exception e) {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Upload failed.");
+			}
+			*/
+
 			response.sendRedirect("AppBasicInfo?method=AllInfo");
 			break;
+			
 		case "delAppInfo":
 			 app_num = request.getParameter("app_num");
 			this.AppBasicInfoService.delInfo(app_num);
@@ -94,6 +128,8 @@ public class AppBasicInfoServlet extends HttpServlet {
 			app_num = request.getParameter("app_num");
 			List<String> showPic = this.AppBasicInfoService.showAppPic(app_num);
 			request.setAttribute("app_num", app_num);
+			request.setAttribute("showPic", showPic);
+			
 			
 			request.getRequestDispatcher("ShowPic.jsp").forward(request, response);
 

@@ -18,6 +18,15 @@
 </head>
 
 <body style="height: 100%; margin: 0">
+
+<div class="video-wrap">
+    <video class="video-wrap__video" poster="images/img-bg@2x.png" 
+    src="videos/bg-video.mp4"  tabindex="-1"    
+    autoplay muted  loop>
+    </video>
+</div>
+
+
 <!-- panel-custom -->
 <div class="panel-custom">
   <div class="panel-heading">

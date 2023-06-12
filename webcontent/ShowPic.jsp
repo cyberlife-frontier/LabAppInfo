@@ -14,9 +14,9 @@
 
 <body>
 	<h4>${app_num }</h4>
-	
-	<img alt="图片缺失" src="">
-	
+	<c:forEach items="${showPic }" var="sp">
+	<img alt="图片缺失" src="${sp }">
+	</c:forEach>
 
 </body>
 </html>
