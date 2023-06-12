@@ -86,8 +86,9 @@
 <!-- panel-custom -->
 
 <!-- add AppInfo modal-->
-<form method="post" action="AppBasicInfo?method=addAppInfo" class="form-horizontal" style="margin-top: 0px;margin: 20px;" role="form"
-      id="form_data">
+<form method="post" enctype="multipart/form-data" action="AppBasicInfo?method=addAppInfo" 
+class="form-horizontal" style="margin-top: 0px;margin: 20px;" 
+role="form" id="form_data">
   <div class="modal fade" id="addInfoModal" tabindex="-1"
        role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
     <div class="modal-dialog">
@@ -163,7 +164,7 @@
               <label for="app_pic" class="col-sm-3 control-label">仪器图片</label>
               <div class="col-sm-9">
                 <input type="file"  class="form-control" id="app_pic"
-                       name="app_pic" >
+                       name="app_pic" multiple>
               </div>
             </div>
           <!-- appPic form-group -->

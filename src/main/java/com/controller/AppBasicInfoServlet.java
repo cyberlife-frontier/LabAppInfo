@@ -1,6 +1,7 @@
 package com.controller;
 
 import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.MultipartConfig;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
@@ -25,7 +26,7 @@ import com.service.AppBasicInfoService;
 import com.service.InfoStatService;
 import com.service.impl.AppBasicInfoServiceImpl;
 import com.service.impl.InfoStatServiceImpl;
-
+@MultipartConfig
 @WebServlet("/AppBasicInfo")
 /**
  * Servlet implementation class AppBasicInfoServlet
@@ -37,7 +38,8 @@ public class AppBasicInfoServlet extends HttpServlet {
     private List<String> AppNum = null;
     private List<String> InfoStat = null;//LabNum
     private List<String> PersonnelAdmin = null;
-    private String uploadPath = "D:\\Users\\Nash\\Documents\\eclipse-workspace\\LabAppInfo\\webcontent\\Assets\\images";
+    
+    private String uploadPath = "D:/Users/Nash/Documents/eclipse-workspace/LabAppInfo/webcontent/Assets/images/";
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -91,31 +93,28 @@ public class AppBasicInfoServlet extends HttpServlet {
 			String lab_num = request.getParameter("lab_num");
 			String date_purchase = request.getParameter("date_purchase");
 			String str[] = request.getParameterValues("app_admin");
-			this.AppBasicInfoService.addInfo(app_num, app_name, lab_num, date_purchase, str);
-			 
-			/*
-			try {
-				// Create a factory for disk-based file items
-				DiskFileItemFactory factory = new DiskFileItemFactory();
-				// Set factory constraints
-				factory.setSizeThreshold(4096); // 设置缓冲区大小，这里是4kb
-				factory.setRepository(new File(this.getServletContext().getRealPath("/WEB-INF/temp")));// 设置缓冲区目录
-				// Create a new file upload handler
-				ServletFileUpload upload = new ServletFileUpload(factory);
-				// Set overall request size constraint
-				upload.setSizeMax(4194304); // 设置最大文件尺寸，这里是4MB
-				
+			//this.AppBasicInfoService.addInfo(app_num, app_name, lab_num, date_purchase, str);
+			
+			//ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
+			try {	
 				 final Collection<Part> parts = request.getParts();
+				 System.out.println(parts);
 				 for (final Part part : parts) {
-				       part.write(uploadPath+part.getSubmittedFileName());
-				    }
-				 //response.getWriter().print("The file has been uploaded successfully.");
+					 String FileName = part.getSubmittedFileName();
+					 System.out.println(FileName);
+					 System.out.println(FileName != null);
+					 
+					 if(FileName != null) 
+				     	part.write(uploadPath+part.getSubmittedFileName());
+					 
+				 }
+				 response.getWriter().print("The file has been uploaded successfully.");
 			}catch(Exception e) {
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Upload failed.");
 			}
-			*/
-
-			response.sendRedirect("AppBasicInfo?method=AllInfo");
+			
+			
+			//response.sendRedirect("AppBasicInfo?method=AllInfo");
 			break;
 			
 		case "delAppInfo":
