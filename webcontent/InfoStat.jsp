@@ -69,7 +69,7 @@
 
 <!--不同年份购置仪器数量变化  -->
 
-<dialog id ="DialogInfo"  style="height: 70%;width:70%;top:10%;left:20%;">
+<dialog id ="DialogInfo">
 	
     <div id="yearStat" style="height: 100%"></div>
 	<button onclick="closeDia()" class="btn btn-danger">关闭</button>

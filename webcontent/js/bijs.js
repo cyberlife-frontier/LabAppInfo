@@ -1,3 +1,9 @@
+/*$("#date_purchase").datetimepicker({
+  format: 'YYYY-MM-DD',
+  locale: moment.locale('zh-CN'),
+         
+});*/
+
 function csschange(){
     var key =  $("#key-change option:selected").val();
 
@@ -20,15 +26,17 @@ function csschange(){
    
 };
 
-$('#addUserModal').on('show.bs.modal');
+$('#addInfoModal').on('show.bs.modal');
 
-$('#delUserModal').on('show.bs.modal', function(event) {
+
+$('#delInfoModal').on('show.bs.modal', function(event) {
         var button = $(event.relatedTarget)
-        var stu_id_card = button.data('stu_id_card')
+        var app_num = button.data('app_num')
         var modal = $(this)
-        /*modal.find('.modal-title').text('删除宿管信息')*/
-        modal.find('#deleteLabel').text('是否删除身份证号码为  ' + stu_id_card + ' 的信息')
-        modal.find('#id').val(stu_id_card)
+        
+        modal.find('#deleteLabel').text('是否删除仪器编号  ' + app_num + ' 的信息')
+        modal.find('#AppNum').val(app_num)
+        
         
     });
     

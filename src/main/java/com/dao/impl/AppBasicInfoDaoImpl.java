@@ -87,7 +87,7 @@ public class AppBasicInfoDaoImpl implements  AppBasicInfoDao{
 	public List<String> InfoStat() {
 		// TODO 自动生成的方法存根
 		Connection connection = JDBCUtil.getDBconnection();
-		String sql = "select distinct lab_num from appliance_info";
+		String sql = "select lab_num from lab_info";
 		PreparedStatement statement = null;
 		ResultSet resultset =null;
 		List<String> InfoStat = new ArrayList<>();
@@ -106,6 +106,105 @@ public class AppBasicInfoDaoImpl implements  AppBasicInfoDao{
 		}
 
 		return InfoStat;
+	}
+
+	@Override
+	public List<String> PersonnelAdmin() {
+		// TODO 自动生成的方法存根
+		Connection connection = JDBCUtil.getDBconnection();
+		String sql = "select admin_name from personnel_admin";
+		PreparedStatement statement = null;
+		ResultSet resultset =null;
+		List<String> PersonnelAdmin = new ArrayList<>();
+		try {
+			statement = connection.prepareStatement(sql);  
+			resultset = statement.executeQuery();
+			while(resultset.next()) {
+				PersonnelAdmin.add(resultset.getString(1));
+	
+			}
+			
+		}catch(SQLException throwables) {
+			
+		}finally {
+			JDBCUtil.closeDB(connection, statement, resultset);
+		}
+
+		return PersonnelAdmin;
+	}
+
+	@Override
+	public Integer addInfo(String app_num, String app_name, String lab_num, 
+			String date_purchase, String app_admin) {
+		// TODO 自动生成的方法存根
+		Connection connection = JDBCUtil.getDBconnection();
+		String sql = "insert into appliance_info(app_num,app_name,lab_num,"
+				+ "date_purchase,app_admin) value(?,?,?,?,?)";
+		PreparedStatement statement = null;
+		Integer result = null;
+		try {
+			statement = connection.prepareStatement(sql);  
+			statement.setString(1, app_num);
+			statement.setString(2, app_name);
+			statement.setString(3, lab_num);
+			statement.setString(4, date_purchase);
+			statement.setString(5, app_admin);
+			
+			result = statement.executeUpdate();
+			
+			
+		}catch(SQLException throwables) {
+			
+		}finally {
+			JDBCUtil.closeDB(connection, statement, null);
+		}
+		return result;
+	}
+
+	@Override
+	public Integer delInfo(String app_num) {
+		// TODO 自动生成的方法存根
+		Connection connection = JDBCUtil.getDBconnection();
+		String sql = "delete from appliance_info where app_num = ?";
+		PreparedStatement statement = null;
+		Integer result = null;
+		try {
+			statement = connection.prepareStatement(sql);  
+			statement.setString(1, app_num);
+			result = statement.executeUpdate();
+
+		}catch(SQLException throwables) {
+			
+		}finally {
+			JDBCUtil.closeDB(connection, statement, null);
+		}
+		return result;
+	}
+
+	@Override
+	public List<String> showAppPic(String app_num) {
+		// TODO 自动生成的方法存根
+		Connection connection = JDBCUtil.getDBconnection();
+		String sql = "select app_pic from appliance_pic"
+				+ " where app_num = '"+app_num+"'";
+		PreparedStatement statement = null;
+		ResultSet resultset =null;
+		List<String> showAppPic = new ArrayList<>();
+		try {
+			statement = connection.prepareStatement(sql);  
+			resultset = statement.executeQuery();
+			while(resultset.next()) {
+				showAppPic.add(resultset.getString(1));
+	
+			}
+			
+		}catch(SQLException throwables) {
+			
+		}finally {
+			JDBCUtil.closeDB(connection, statement, resultset);
+		}
+
+		return showAppPic;
 	}
 	
 	

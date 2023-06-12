@@ -147,11 +147,12 @@ body {
 
 dialog{
 	position: absolute;
-	color:#e63c3c;
+	color:rgb(0, 128, 255);
 	left:auto;
-	height:30px;
-	width:200px;
-	border-radius: 10px;
+	height:70%;
+	width:70%;
+	top:10%;
+	left:18%;
 	border-width: 1px;
 	transition: opacity .3s,transform .4s,-webkit-transform .4s;
 }
