@@ -13,4 +13,5 @@ public interface AppBasicInfoDao {
 			String date_purchase,String app_admin);
 	public Integer delInfo(String app_num);
 	public List<String> showAppPic(String app_num);
+	public Integer addAppPic(String app_num,String DBsave);
 }

@@ -95,7 +95,17 @@ public class AppBasicInfoServlet extends HttpServlet {
 			String str[] = request.getParameterValues("app_admin");
 			//this.AppBasicInfoService.addInfo(app_num, app_name, lab_num, date_purchase, str);
 			
-			//ServletFileUpload sf = new ServletFileUpload(new DiskFileItemFactory());
+			try {
+				final Collection<Part> parts = request.getParts();
+				this.AppBasicInfoService.addAppPic(app_num,parts);
+				
+			}catch(Exception e) {
+				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Upload failed.");
+			}
+			
+			
+			
+			/*
 			try {	
 				 final Collection<Part> parts = request.getParts();
 				 System.out.println(parts);
@@ -112,7 +122,7 @@ public class AppBasicInfoServlet extends HttpServlet {
 			}catch(Exception e) {
 				response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Upload failed.");
 			}
-			
+			*/
 			
 			//response.sendRedirect("AppBasicInfo?method=AllInfo");
 			break;

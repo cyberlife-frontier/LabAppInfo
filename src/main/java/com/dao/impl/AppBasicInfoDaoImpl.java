@@ -206,6 +206,12 @@ public class AppBasicInfoDaoImpl implements  AppBasicInfoDao{
 
 		return showAppPic;
 	}
+
+	@Override
+	public Integer addAppPic(String app_num, String DBsave) {
+		// TODO 自动生成的方法存根
+		return null;
+	}
 	
 	
 	
